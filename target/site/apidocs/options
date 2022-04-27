@@ -1,0 +1,24 @@
+-classpath
+'/Users/harshadbhandwaldar/.m2/repository/unknown/binary/jcalendar-1.4/SNAPSHOT/jcalendar-1.4-SNAPSHOT.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'/Users/harshadbhandwaldar/NetBeansProjects/dbsproj2/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2022. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/harshadbhandwaldar/NetBeansProjects/dbsproj2/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'dbsproj2 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'dbsproj2 1.0-SNAPSHOT API'
