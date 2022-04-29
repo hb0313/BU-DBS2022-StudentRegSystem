@@ -26,13 +26,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
 
     int dbConnectflag = 0, tupleSelectedFlag = 0, searchOpt1Flag = 0, searchOpt2Flag = 0;
     Connection sqlConn;
-    
-    /**
-     * Creates new form StudentRegSystem
-     */
-//    private static final String username="hbhandw1";
-//    private static final String password="harshad13";
-//    private static final String dataConn ="jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111";
+
     public StudentRegSystem() {
         initComponents();
         classidtxtfield.setEnabled(false);
@@ -42,14 +36,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
         btnUpdate.setEnabled(false);
         btnAdd.setEnabled(false);
         btnDelete.setEnabled(false);
-        jButton5.setEnabled(false);
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-//            Statement st = sqlConn.createStatement();
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(null, ex);
-//        }
+        btnGoToEnroll.setEnabled(false);
     }
     SearchFrame SFram = new SearchFrame();
     SearchFrame1 SFram1 = new SearchFrame1();
@@ -66,8 +53,8 @@ public class StudentRegSystem extends javax.swing.JFrame {
         mainPanel = new javax.swing.JTabbedPane();
         studentPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tblStudents = new javax.swing.JTable();
+        btnShowAll = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -86,7 +73,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
         txtGPA = new javax.swing.JSpinner();
         txtLevel = new javax.swing.JTextField();
         txtdob = new javax.swing.JFormattedTextField();
-        jButton5 = new javax.swing.JButton();
+        btnGoToEnroll = new javax.swing.JButton();
         coursesPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -99,7 +86,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
         jTable8 = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tblClasses = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -116,14 +103,14 @@ public class StudentRegSystem extends javax.swing.JFrame {
         coursenumtxtfield = new javax.swing.JTextField();
         label_deptcode = new javax.swing.JLabel();
         deptcodetxtfield = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbxSavedSearch = new javax.swing.JComboBox<>();
         jLabel23 = new javax.swing.JLabel();
         txtenrollBnum = new javax.swing.JTextField();
         txtenrollclassid = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnEnrollStud = new javax.swing.JButton();
+        btnWithdrawStudent = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         logstable = new javax.swing.JTable();
@@ -138,8 +125,8 @@ public class StudentRegSystem extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        lblConnectDB = new javax.swing.JLabel();
+        lblDisconnectDB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -151,7 +138,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
         studentPanel.setBackground(new java.awt.Color(255, 255, 255));
         studentPanel.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -167,22 +154,22 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblStudents.setColumnSelectionAllowed(true);
+        tblStudents.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tblStudentsMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jScrollPane1.setViewportView(tblStudents);
+        tblStudents.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
-        jButton1.setText("SHOW ALL");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnShowAll.setBackground(new java.awt.Color(204, 204, 204));
+        btnShowAll.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
+        btnShowAll.setText("SHOW ALL");
+        btnShowAll.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnShowAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnShowAllActionPerformed(evt);
             }
         });
 
@@ -190,16 +177,6 @@ public class StudentRegSystem extends javax.swing.JFrame {
         btnAdd.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
         btnAdd.setText("ADD");
         btnAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddMouseClicked(evt);
-            }
-        });
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
 
         btnUpdate.setBackground(new java.awt.Color(204, 204, 204));
         btnUpdate.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
@@ -225,28 +202,10 @@ public class StudentRegSystem extends javax.swing.JFrame {
 
         txtBnumber.setToolTipText("B#");
         txtBnumber.setName(""); // NOI18N
-        txtBnumber.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtBnumberInputMethodTextChanged(evt);
-            }
-        });
-        txtBnumber.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtBnumberPropertyChange(evt);
-            }
-        });
 
         jLabel2.setText("B#");
 
         jLabel3.setText("FirstName");
-
-        txtLname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLnameActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("LastName");
 
@@ -336,13 +295,13 @@ public class StudentRegSystem extends javax.swing.JFrame {
         txtBnumber.getAccessibleContext().setAccessibleName("");
         txtBnumber.getAccessibleContext().setAccessibleDescription("");
 
-        jButton5.setBackground(new java.awt.Color(204, 204, 204));
-        jButton5.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
-        jButton5.setText("ENROLL");
-        jButton5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGoToEnroll.setBackground(new java.awt.Color(204, 204, 204));
+        btnGoToEnroll.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
+        btnGoToEnroll.setText("ENROLL");
+        btnGoToEnroll.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnGoToEnroll.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
+                btnGoToEnrollMouseClicked(evt);
             }
         });
 
@@ -357,7 +316,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
                         .addGroup(studentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(studentPanelLayout.createSequentialGroup()
                                 .addGap(394, 394, 394)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -365,7 +324,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnGoToEnroll, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(studentPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1390, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -379,11 +338,11 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(studentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGoToEnroll, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
@@ -451,17 +410,12 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable8MouseClicked(evt);
-            }
-        });
         jScrollPane8.setViewportView(jTable8);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel14.setText("Enrollements");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblClasses.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -477,12 +431,12 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblClasses.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable4MouseClicked(evt);
+                tblClassesMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(tblClasses);
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel11.setText("Classes");
@@ -606,11 +560,6 @@ public class StudentRegSystem extends javax.swing.JFrame {
         btnSearch.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
         btnSearch.setText("SEARCH");
         btnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSearchMouseClicked(evt);
-            }
-        });
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -622,12 +571,6 @@ public class StudentRegSystem extends javax.swing.JFrame {
         label_classid.setText("Classid");
 
         label_coursenum.setText("Course#");
-
-        coursenumtxtfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coursenumtxtfieldActionPerformed(evt);
-            }
-        });
 
         label_deptcode.setText("DeptCode");
 
@@ -674,31 +617,15 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "ClassId", "DeptCode,Course#" }));
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
-            }
-        });
-        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBox1MouseClicked(evt);
-            }
-        });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cmbxSavedSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "ClassId", "DeptCode,Course#" }));
+        cmbxSavedSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cmbxSavedSearchActionPerformed(evt);
             }
         });
 
         jLabel23.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
         jLabel23.setText("Search by");
-
-        txtenrollBnum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtenrollBnumActionPerformed(evt);
-            }
-        });
 
         jLabel24.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
         jLabel24.setText("B#");
@@ -706,23 +633,23 @@ public class StudentRegSystem extends javax.swing.JFrame {
         jLabel25.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
         jLabel25.setText("ClassId");
 
-        jButton6.setBackground(new java.awt.Color(204, 204, 204));
-        jButton6.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
-        jButton6.setText("ENROLL");
-        jButton6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnEnrollStud.setBackground(new java.awt.Color(204, 204, 204));
+        btnEnrollStud.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
+        btnEnrollStud.setText("ENROLL");
+        btnEnrollStud.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEnrollStud.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnEnrollStudActionPerformed(evt);
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(204, 204, 204));
-        jButton7.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
-        jButton7.setText("WITHDRAW");
-        jButton7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnWithdrawStudent.setBackground(new java.awt.Color(204, 204, 204));
+        btnWithdrawStudent.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
+        btnWithdrawStudent.setText("WITHDRAW");
+        btnWithdrawStudent.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnWithdrawStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnWithdrawStudentActionPerformed(evt);
             }
         });
 
@@ -746,15 +673,15 @@ public class StudentRegSystem extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnWithdrawStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtenrollBnum, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbxSavedSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtenrollclassid, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnEnrollStud, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -774,11 +701,11 @@ public class StudentRegSystem extends javax.swing.JFrame {
                     .addComponent(jLabel25))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEnrollStud, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnWithdrawStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbxSavedSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -969,19 +896,19 @@ public class StudentRegSystem extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 67, 51));
 
-        jLabel1.setFont(new java.awt.Font("Sana", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Student Registration System");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblConnectDB.setFont(new java.awt.Font("Sana", 1, 36)); // NOI18N
+        lblConnectDB.setForeground(new java.awt.Color(255, 255, 255));
+        lblConnectDB.setText("Student Registration System");
+        lblConnectDB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                lblConnectDBMouseClicked(evt);
             }
         });
 
-        jLabel15.setIcon(new javax.swing.ImageIcon("/Users/harshadbhandwaldar/NetBeansProjects/dbsproj2/img/sunybing.png")); // NOI18N
-        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblDisconnectDB.setIcon(new javax.swing.ImageIcon("/Users/harshadbhandwaldar/NetBeansProjects/dbsproj2/img/sunybing.png")); // NOI18N
+        lblDisconnectDB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel15MouseClicked(evt);
+                lblDisconnectDBMouseClicked(evt);
             }
         });
 
@@ -991,9 +918,9 @@ public class StudentRegSystem extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel15)
+                .addComponent(lblDisconnectDB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblConnectDB)
                 .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1002,10 +929,10 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel15))
+                        .addComponent(lblDisconnectDB))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel1)))
+                        .addComponent(lblConnectDB)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1030,45 +957,17 @@ public class StudentRegSystem extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtLnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLnameActionPerformed
-
-    private void txtBnumberPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtBnumberPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBnumberPropertyChange
-
-    private void txtBnumberInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtBnumberInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBnumberInputMethodTextChanged
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        UpdateTables();
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddMouseClicked
-//    public Connection connectDBS(Connection sqlCnn) {
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-//            Statement st = sqlConn.createStatement();
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(null, ex);
-//        }
-//        return sqlCnn;
-//    }
-    
-    public void disconnectDBS () {
+    // ******** Method to Connect disconnect database ********* //
+    public void disconnectDBS() {
         try {
             sqlConn.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    public void connectDBS () {
+
+    // ******** Method to Connect connect database ********* //
+    public void connectDBS() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
@@ -1077,19 +976,13 @@ public class StudentRegSystem extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    public void UpdateTables () {
-        try {
-            DefaultTableModel table1Model1 = (DefaultTableModel) jTable1.getModel();
-            table1Model1.setRowCount(0);
-            
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-//            Statement st = sqlConn.createStatement();
-            //String sql = "select * from students";
-            //ResultSet rs = st.executeQuery(sql);
 
-            // Populate Stuedents table usng procedure
+    // ******** Method to populate and refresh Students, Classes and g-enrollments ********* //
+    public void UpdateTables() {
+        try {
+            DefaultTableModel table1Model1 = (DefaultTableModel) tblStudents.getModel();
+            table1Model1.setRowCount(0);
+
             CallableStatement stmt_students = sqlConn.prepareCall("BEGIN main_pkg.show_students(?); END;");
             stmt_students.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_students.execute();
@@ -1106,7 +999,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
 
                 String tbData[] = {Bnumber, f_name, l_name, Email, DOB, Level, GPA};
 
-                DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+                DefaultTableModel tblModel = (DefaultTableModel) tblStudents.getModel();
 
                 tblModel.addRow(tbData);
 
@@ -1152,7 +1045,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
             // Populate g_enrollement table usng procedure
             DefaultTableModel table1Model8 = (DefaultTableModel) jTable8.getModel();
             table1Model8.setRowCount(0);
-            
+
             CallableStatement stmt_genroll = sqlConn.prepareCall("BEGIN main_pkg.show_g_enrollments(?); END;");
             stmt_genroll.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_genroll.execute();
@@ -1170,7 +1063,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
             }
 
             // Populate classes table usng procedure
-            DefaultTableModel table1Model4 = (DefaultTableModel) jTable4.getModel();
+            DefaultTableModel table1Model4 = (DefaultTableModel) tblClasses.getModel();
             table1Model4.setRowCount(0);
             CallableStatement stmt_classes = sqlConn.prepareCall("BEGIN main_pkg.show_classes(?); END;");
             stmt_classes.registerOutParameter(1, OracleTypes.CURSOR);
@@ -1189,7 +1082,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 String room = rs_classes.getString("room");
 
                 String tbl_classesData[] = {classid, deptCode, score, section, year, semester, limit, classSize, room};
-                DefaultTableModel tbl_classesModel = (DefaultTableModel) jTable4.getModel();
+                DefaultTableModel tbl_classesModel = (DefaultTableModel) tblClasses.getModel();
 
                 tbl_classesModel.addRow(tbl_classesData);
             }
@@ -1226,26 +1119,20 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 tbl_creditsModel.addRow(tbl_creditsData);
             }
             dbConnectflag = 1;
-            
-            //btnUpdate.setEnabled(true);
-            //btnAdd.setEnabled(true);
+
             btnDelete.setEnabled(true);
-            jButton5.setEnabled(true);
+            btnGoToEnroll.setEnabled(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
         logs();
     }
-    
-    private void logs () {
+
+    // ******** Method to populate and refresh logs table ********* //
+    private void logs() {
         try {
             DefaultTableModel table1Model = (DefaultTableModel) logstable.getModel();
             table1Model.setRowCount(0);
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-//            Statement st = sqlConn.createStatement();
-            //String sql = "select * from students";
-            //ResultSet rs = st.executeQuery(sql);
 
             // Populate Stuedents table usng procedure
             CallableStatement stmt_students = sqlConn.prepareCall("BEGIN main_pkg.show_logs(?); END;");
@@ -1267,26 +1154,28 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 tblModel.addRow(tbData);
             }
 
-            } catch (Exception ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        UpdateTables();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    // ******** Method to retrive data from database ********* //
+    private void btnShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAllActionPerformed
+        UpdateTables();
+    }//GEN-LAST:event_btnShowAllActionPerformed
+
+    // ******** Method to populate textfields when any tuple is selected from table ********* //
+    private void tblStudentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStudentsMouseClicked
 
         // Get selected value from row and column of table and store it in String variable
-        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
-        String bnumber_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 0).toString();
-        String f_name_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 1).toString();
-        String l_name_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 2).toString();
-        String email_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 3).toString();
-        String dob_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 4).toString();
-        String level_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 5).toString();
-        String gpa_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 6).toString();
+        DefaultTableModel tblModel = (DefaultTableModel) tblStudents.getModel();
+        String bnumber_txt = tblModel.getValueAt(tblStudents.getSelectedRow(), 0).toString();
+        String f_name_txt = tblModel.getValueAt(tblStudents.getSelectedRow(), 1).toString();
+        String l_name_txt = tblModel.getValueAt(tblStudents.getSelectedRow(), 2).toString();
+        String email_txt = tblModel.getValueAt(tblStudents.getSelectedRow(), 3).toString();
+        String dob_txt = tblModel.getValueAt(tblStudents.getSelectedRow(), 4).toString();
+        String level_txt = tblModel.getValueAt(tblStudents.getSelectedRow(), 5).toString();
+        String gpa_txt = tblModel.getValueAt(tblStudents.getSelectedRow(), 6).toString();
 
         // Fill the textfields with relevant data
         txtBnumber.setText(bnumber_txt);
@@ -1299,9 +1188,10 @@ public class StudentRegSystem extends javax.swing.JFrame {
         Integer GPA = Integer.parseInt(gpa_txt);
         txtGPA.setValue(GPA);
         tupleSelectedFlag = 1;
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tblStudentsMouseClicked
 
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    // ******** Method to navigate to enrollment tab, B# is passed along ********* //
+    private void btnGoToEnrollMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGoToEnrollMouseClicked
         try {
             if ((dbConnectflag == 0 || tupleSelectedFlag == 0)) {
                 throw new Exception();
@@ -1312,17 +1202,16 @@ public class StudentRegSystem extends javax.swing.JFrame {
         } catch (Exception eup) {
             JOptionPane.showMessageDialog(null, "Click SHOW ALL button and select student to Enroll.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_jButton5MouseClicked
+    }//GEN-LAST:event_btnGoToEnrollMouseClicked
 
+    // ******** Method out of scope ********* //
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         UpdateTables();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    // ******** Method to perform saved searchs ********* //
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-//            Statement st = sqlConn.createStatement();
 
             if (searchOpt1Flag == 1) {
                 String clsid = classidtxtfield.getText();
@@ -1398,27 +1287,12 @@ public class StudentRegSystem extends javax.swing.JFrame {
 //        classidtxtfield.setText("");
 //        deptcodetxtfield.setText("");
 //        coursenumtxtfield.setText("");
-        jComboBox1.setSelectedItem("None");
+        cmbxSavedSearch.setSelectedItem("None");
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
-
-    }//GEN-LAST:event_btnSearchMouseClicked
-
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
-
-    private void coursenumtxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coursenumtxtfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_coursenumtxtfieldActionPerformed
-
-    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1MouseClicked
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        if ((jComboBox1.getSelectedItem().toString()).equals("ClassId")) {
+    // ******** Method to select saved search and enable textfields ********* //
+    private void cmbxSavedSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxSavedSearchActionPerformed
+        if ((cmbxSavedSearch.getSelectedItem().toString()).equals("ClassId")) {
             deptcodetxtfield.setText("");
             coursenumtxtfield.setText("");
             classidtxtfield.setEnabled(true);
@@ -1427,7 +1301,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
             coursenumtxtfield.setEnabled(false);
             searchOpt1Flag = 1;
 
-        } else if ((jComboBox1.getSelectedItem().toString()).equals("DeptCode,Course#")) {
+        } else if ((cmbxSavedSearch.getSelectedItem().toString()).equals("DeptCode,Course#")) {
             classidtxtfield.setText("");
             classidtxtfield.setEnabled(false);
             deptcodetxtfield.setEnabled(true);
@@ -1444,22 +1318,11 @@ public class StudentRegSystem extends javax.swing.JFrame {
             coursenumtxtfield.setEnabled(false);
             btnSearch.setEnabled(false);
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cmbxSavedSearchActionPerformed
 
-    private void txtenrollBnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtenrollBnumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtenrollBnumActionPerformed
-
-    private void jTable8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MouseClicked
-
-    }//GEN-LAST:event_jTable8MouseClicked
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    // ******** Method to Enroll Student ********* //
+    private void btnEnrollStudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnrollStudActionPerformed
         try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-//            Statement st = sqlConn.createStatement();
-
             String bnum = txtenrollBnum.getText();
             String clsid = txtenrollclassid.getText();
             CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.enroll_grad_student(?,?,?,?); END;");
@@ -1474,29 +1337,26 @@ public class StudentRegSystem extends javax.swing.JFrame {
             if (errorflag == -1) {
                 JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, errorMsg, "ALERT", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "SUCCESS: Student Enrolled!", "ALERT", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
         txtenrollBnum.setText("");
-        txtenrollclassid.setText(""); 
+        txtenrollclassid.setText("");
         UpdateTables();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnEnrollStudActionPerformed
 
-    
-    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
-        DefaultTableModel tblModel = (DefaultTableModel) jTable4.getModel();
-        String classid_txt = tblModel.getValueAt(jTable4.getSelectedRow(), 0).toString();
+    // ******** Method to select and populate tuple(classid) to textfield ********* //
+    private void tblClassesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClassesMouseClicked
+        DefaultTableModel tblModel = (DefaultTableModel) tblClasses.getModel();
+        String classid_txt = tblModel.getValueAt(tblClasses.getSelectedRow(), 0).toString();
         txtenrollclassid.setText(classid_txt);
-    }//GEN-LAST:event_jTable4MouseClicked
+    }//GEN-LAST:event_tblClassesMouseClicked
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    // ******** Method to Withdraw enrollment of student ********* //
+    private void btnWithdrawStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWithdrawStudentActionPerformed
         try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-//            Statement st = sqlConn.createStatement();
-
             String bnum = txtenrollBnum.getText();
             String clsid = txtenrollclassid.getText();
             CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.disenroll_grad_student(?,?,?,?); END;");
@@ -1511,7 +1371,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
             if (errorflag == -1) {
                 JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, errorMsg, "ALERT", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "SUCCESS: Student withdrawn.", "ALERT", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -1519,14 +1379,11 @@ public class StudentRegSystem extends javax.swing.JFrame {
         txtenrollBnum.setText("");
         txtenrollclassid.setText("");
         UpdateTables();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnWithdrawStudentActionPerformed
 
+    // ******** Method to delete student record from table ********* //
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-            try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-//            Statement st = sqlConn.createStatement();
-
+        try {
             String bnum = txtBnumber.getText();
             CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.delete_student(?,?,?); END;");
             stmt_showclass.setString(1, bnum);
@@ -1539,7 +1396,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
             if (errorflag == -1) {
                 JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
             } else if (errorflag == 0) {
-                JOptionPane.showMessageDialog(null, errorMsg, "ALERT", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "SUCCESS: Record deleted!", "ALERT", JOptionPane.WARNING_MESSAGE);
             }
 //            sqlConn.close();
         } catch (Exception ex) {
@@ -1548,13 +1405,15 @@ public class StudentRegSystem extends javax.swing.JFrame {
         UpdateTables();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+    // ******** Method to call disconnect database method ********* //
+    private void lblDisconnectDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDisconnectDBMouseClicked
         disconnectDBS();
-    }//GEN-LAST:event_jLabel15MouseClicked
+    }//GEN-LAST:event_lblDisconnectDBMouseClicked
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    // ******** Method to call Connect database method ********* //
+    private void lblConnectDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConnectDBMouseClicked
         connectDBS();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_lblConnectDBMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1588,29 +1447,27 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 new StudentRegSystem().setVisible(true);
             }
         });
-       
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEnrollStud;
+    private javax.swing.JButton btnGoToEnroll;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnShowAll;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnWithdrawStudent;
     private javax.swing.JTextField classidtxtfield;
+    private javax.swing.JComboBox<String> cmbxSavedSearch;
     private javax.swing.JTextField coursenumtxtfield;
     private javax.swing.JPanel coursesPanel;
     private javax.swing.JTextField deptcodetxtfield;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1646,19 +1503,21 @@ public class StudentRegSystem extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable8;
     private javax.swing.JLabel label_classid;
     private javax.swing.JLabel label_coursenum;
     private javax.swing.JLabel label_deptcode;
+    private javax.swing.JLabel lblConnectDB;
+    private javax.swing.JLabel lblDisconnectDB;
     private javax.swing.JTable logstable;
     private javax.swing.JTabbedPane mainPanel;
     private javax.swing.JPanel studentPanel;
+    private javax.swing.JTable tblClasses;
+    private javax.swing.JTable tblStudents;
     private javax.swing.JTextField txtBnumber;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFname;
