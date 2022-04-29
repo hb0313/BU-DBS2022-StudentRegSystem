@@ -25,7 +25,8 @@ import oracle.jdbc.*;
 public class StudentRegSystem extends javax.swing.JFrame {
 
     int dbConnectflag = 0, tupleSelectedFlag = 0, searchOpt1Flag = 0, searchOpt2Flag = 0;
-
+    Connection sqlConn;
+    
     /**
      * Creates new form StudentRegSystem
      */
@@ -38,6 +39,17 @@ public class StudentRegSystem extends javax.swing.JFrame {
         deptcodetxtfield.setEnabled(false);
         coursenumtxtfield.setEnabled(false);
         btnSearch.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnAdd.setEnabled(false);
+        btnDelete.setEnabled(false);
+        jButton5.setEnabled(false);
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+//            Statement st = sqlConn.createStatement();
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, ex);
+//        }
     }
     SearchFrame SFram = new SearchFrame();
     SearchFrame1 SFram1 = new SearchFrame1();
@@ -56,9 +68,9 @@ public class StudentRegSystem extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         txtBnumber = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -114,7 +126,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+        logstable = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -174,35 +186,40 @@ public class StudentRegSystem extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 204));
-        jButton2.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
-        jButton2.setText("ADD");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAdd.setBackground(new java.awt.Color(204, 204, 204));
+        btnAdd.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
+        btnAdd.setText("ADD");
+        btnAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btnAddMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 204));
-        jButton3.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
-        jButton3.setText("UPDATE");
-        jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setBackground(new java.awt.Color(204, 204, 204));
+        btnUpdate.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
+        btnUpdate.setText("UPDATE");
+        btnUpdate.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 204));
-        jButton4.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
-        jButton4.setText("DELETE");
-        jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDelete.setBackground(new java.awt.Color(204, 204, 204));
+        btnDelete.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
+        btnDelete.setText("DELETE");
+        btnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -342,11 +359,11 @@ public class StudentRegSystem extends javax.swing.JFrame {
                                 .addGap(394, 394, 394)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(studentPanelLayout.createSequentialGroup()
@@ -363,9 +380,9 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(studentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -582,7 +599,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         btnSearch.setBackground(new java.awt.Color(204, 204, 204));
@@ -703,6 +720,11 @@ public class StudentRegSystem extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
         jButton7.setText("WITHDRAW");
         jButton7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -779,16 +801,16 @@ public class StudentRegSystem extends javax.swing.JFrame {
         coursesPanelLayout.setVerticalGroup(
             coursesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(coursesPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(coursesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(coursesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         mainPanel.addTab("Enrollment", coursesPanel);
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        logstable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -807,23 +829,23 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane7.setViewportView(jTable7);
+        jScrollPane7.setViewportView(logstable);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
+                .addContainerGap(113, Short.MAX_VALUE)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
+                .addGap(104, 104, 104))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         mainPanel.addTab("Logs", jPanel4);
@@ -950,8 +972,18 @@ public class StudentRegSystem extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Sana", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Student Registration System");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jLabel15.setIcon(new javax.swing.ImageIcon("/Users/harshadbhandwaldar/NetBeansProjects/dbsproj2/img/sunybing.png")); // NOI18N
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -992,8 +1024,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1011,19 +1042,50 @@ public class StudentRegSystem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBnumberInputMethodTextChanged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        UpdateTables();
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddMouseClicked
+//    public Connection connectDBS(Connection sqlCnn) {
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+//            Statement st = sqlConn.createStatement();
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, ex);
+//        }
+//        return sqlCnn;
+//    }
+    
+    public void disconnectDBS () {
+        try {
+            sqlConn.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    public void connectDBS () {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+            sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
             Statement st = sqlConn.createStatement();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    public void UpdateTables () {
+        try {
+            DefaultTableModel table1Model1 = (DefaultTableModel) jTable1.getModel();
+            table1Model1.setRowCount(0);
+            
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+//            Statement st = sqlConn.createStatement();
             //String sql = "select * from students";
             //ResultSet rs = st.executeQuery(sql);
 
@@ -1050,7 +1112,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
 
             }
 
-            // Populate courses table usng procedure
+            // Populate courses table usng procedure            
             CallableStatement stmt_courses = sqlConn.prepareCall("BEGIN main_pkg.show_courses(?); END;");
             stmt_courses.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_courses.execute();
@@ -1068,6 +1130,8 @@ public class StudentRegSystem extends javax.swing.JFrame {
             }
 
             // Populate prerequisties table usng procedure
+            DefaultTableModel table1Model = (DefaultTableModel) jTable3.getModel();
+            table1Model.setRowCount(0);
             CallableStatement stmt_prerequisites = sqlConn.prepareCall("BEGIN main_pkg.show_prerequisites(?); END;");
             stmt_prerequisites.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_prerequisites.execute();
@@ -1086,6 +1150,9 @@ public class StudentRegSystem extends javax.swing.JFrame {
             }
 
             // Populate g_enrollement table usng procedure
+            DefaultTableModel table1Model8 = (DefaultTableModel) jTable8.getModel();
+            table1Model8.setRowCount(0);
+            
             CallableStatement stmt_genroll = sqlConn.prepareCall("BEGIN main_pkg.show_g_enrollments(?); END;");
             stmt_genroll.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_genroll.execute();
@@ -1103,6 +1170,8 @@ public class StudentRegSystem extends javax.swing.JFrame {
             }
 
             // Populate classes table usng procedure
+            DefaultTableModel table1Model4 = (DefaultTableModel) jTable4.getModel();
+            table1Model4.setRowCount(0);
             CallableStatement stmt_classes = sqlConn.prepareCall("BEGIN main_pkg.show_classes(?); END;");
             stmt_classes.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_classes.execute();
@@ -1156,12 +1225,55 @@ public class StudentRegSystem extends javax.swing.JFrame {
 
                 tbl_creditsModel.addRow(tbl_creditsData);
             }
-
-            sqlConn.close();
             dbConnectflag = 1;
+            
+            //btnUpdate.setEnabled(true);
+            //btnAdd.setEnabled(true);
+            btnDelete.setEnabled(true);
+            jButton5.setEnabled(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
+        logs();
+    }
+    
+    private void logs () {
+        try {
+            DefaultTableModel table1Model = (DefaultTableModel) logstable.getModel();
+            table1Model.setRowCount(0);
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+//            Statement st = sqlConn.createStatement();
+            //String sql = "select * from students";
+            //ResultSet rs = st.executeQuery(sql);
+
+            // Populate Stuedents table usng procedure
+            CallableStatement stmt_students = sqlConn.prepareCall("BEGIN main_pkg.show_logs(?); END;");
+            stmt_students.registerOutParameter(1, OracleTypes.CURSOR);
+            stmt_students.execute();
+            ResultSet rs = ((OracleCallableStatement) stmt_students).getCursor(1);
+
+            while (rs.next()) {
+                String logNumber = rs.getString("log#");
+                String userName = rs.getString("user_name");
+                String opTime = rs.getString("op_time");
+                String tableName = rs.getString("table_name");
+                String operation = rs.getString("operation");
+                String tupleKeyVal = rs.getString("tuple_keyvalue");
+
+                String tbData[] = {logNumber, userName, opTime, tableName, operation, tupleKeyVal};
+                DefaultTableModel tblModel = (DefaultTableModel) logstable.getModel();
+
+                tblModel.addRow(tbData);
+            }
+
+            } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        UpdateTables();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -1202,15 +1314,15 @@ public class StudentRegSystem extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        UpdateTables();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-            Statement st = sqlConn.createStatement();
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+//            Statement st = sqlConn.createStatement();
 
             if (searchOpt1Flag == 1) {
                 String clsid = classidtxtfield.getText();
@@ -1280,8 +1392,6 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 searchOpt2Flag = 0;
             }
 
-            sqlConn.close();
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1346,41 +1456,105 @@ public class StudentRegSystem extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
-            Statement st = sqlConn.createStatement();
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+//            Statement st = sqlConn.createStatement();
 
             String bnum = txtenrollBnum.getText();
             String clsid = txtenrollclassid.getText();
-            CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.show_enroll_grad_student(?,?,?,?,?); END;");
+            CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.enroll_grad_student(?,?,?,?); END;");
             stmt_showclass.setString(1, bnum);
             stmt_showclass.setString(2, clsid);
-            stmt_showclass.registerOutParameter(3, OracleTypes.CURSOR);
-            stmt_showclass.registerOutParameter(4, Types.INTEGER);
-            stmt_showclass.registerOutParameter(5, Types.VARCHAR);
+            stmt_showclass.registerOutParameter(3, Types.INTEGER);
+            stmt_showclass.registerOutParameter(4, Types.VARCHAR);
             stmt_showclass.executeUpdate();
-            ResultSet rs_showclass = ((OracleCallableStatement) stmt_showclass).getCursor(3);
 
-            int errorflag = stmt_showclass.getInt(4);
-            String errorMsg = stmt_showclass.getString(5);
+            int errorflag = stmt_showclass.getInt(3);
+            String errorMsg = stmt_showclass.getString(4);
             if (errorflag == -1) {
                 JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, errorMsg, "ALERT", JOptionPane.WARNING_MESSAGE);
             }
-            sqlConn.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
         txtenrollBnum.setText("");
-        txtenrollclassid.setText("");
+        txtenrollclassid.setText(""); 
+        UpdateTables();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         DefaultTableModel tblModel = (DefaultTableModel) jTable4.getModel();
         String classid_txt = tblModel.getValueAt(jTable4.getSelectedRow(), 0).toString();
         txtenrollclassid.setText(classid_txt);
     }//GEN-LAST:event_jTable4MouseClicked
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+//            Statement st = sqlConn.createStatement();
+
+            String bnum = txtenrollBnum.getText();
+            String clsid = txtenrollclassid.getText();
+            CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.disenroll_grad_student(?,?,?,?); END;");
+            stmt_showclass.setString(1, bnum);
+            stmt_showclass.setString(2, clsid);
+            stmt_showclass.registerOutParameter(3, Types.INTEGER);
+            stmt_showclass.registerOutParameter(4, Types.VARCHAR);
+            stmt_showclass.executeUpdate();
+
+            int errorflag = stmt_showclass.getInt(3);
+            String errorMsg = stmt_showclass.getString(4);
+            if (errorflag == -1) {
+                JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, errorMsg, "ALERT", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        txtenrollBnum.setText("");
+        txtenrollclassid.setText("");
+        UpdateTables();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+            try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
+//            Statement st = sqlConn.createStatement();
+
+            String bnum = txtBnumber.getText();
+            CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.delete_student(?,?,?); END;");
+            stmt_showclass.setString(1, bnum);
+            stmt_showclass.registerOutParameter(2, Types.INTEGER);
+            stmt_showclass.registerOutParameter(3, Types.VARCHAR);
+            stmt_showclass.executeUpdate();
+
+            int errorflag = stmt_showclass.getInt(2);
+            String errorMsg = stmt_showclass.getString(3);
+            if (errorflag == -1) {
+                JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (errorflag == 0) {
+                JOptionPane.showMessageDialog(null, errorMsg, "ALERT", JOptionPane.WARNING_MESSAGE);
+            }
+//            sqlConn.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        UpdateTables();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        disconnectDBS();
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        connectDBS();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1408,25 +1582,24 @@ public class StudentRegSystem extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StudentRegSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new StudentRegSystem().setVisible(true);
             }
         });
+       
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField classidtxtfield;
     private javax.swing.JTextField coursenumtxtfield;
     private javax.swing.JPanel coursesPanel;
     private javax.swing.JTextField deptcodetxtfield;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -1479,11 +1652,11 @@ public class StudentRegSystem extends javax.swing.JFrame {
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JLabel label_classid;
     private javax.swing.JLabel label_coursenum;
     private javax.swing.JLabel label_deptcode;
+    private javax.swing.JTable logstable;
     private javax.swing.JTabbedPane mainPanel;
     private javax.swing.JPanel studentPanel;
     private javax.swing.JTextField txtBnumber;
