@@ -23,7 +23,8 @@ import java.util.Date;
 import oracle.jdbc.*;
 
 public class StudentRegSystem extends javax.swing.JFrame {
-    int dbConnectflag = 0, tupleSelectedFlag = 0;
+
+    int dbConnectflag = 0, tupleSelectedFlag = 0, searchOpt1Flag = 0, searchOpt2Flag = 0;
 
     /**
      * Creates new form StudentRegSystem
@@ -37,9 +38,10 @@ public class StudentRegSystem extends javax.swing.JFrame {
         deptcodetxtfield.setEnabled(false);
         coursenumtxtfield.setEnabled(false);
         btnSearch.setEnabled(false);
-// 
     }
     SearchFrame SFram = new SearchFrame();
+    SearchFrame1 SFram1 = new SearchFrame1();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,9 +105,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
         label_deptcode = new javax.swing.JLabel();
         deptcodetxtfield = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel10 = new javax.swing.JPanel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTable9 = new javax.swing.JTable();
+        jLabel23 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTable7 = new javax.swing.JTable();
@@ -565,7 +565,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         btnSearch.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
@@ -656,75 +656,41 @@ public class StudentRegSystem extends javax.swing.JFrame {
             }
         });
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Searched by - ClassId", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Sana", 0, 14))); // NOI18N
-
-        jTable9.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "B#", "FirstName", "LastName"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane9.setViewportView(jTable9);
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel23.setFont(new java.awt.Font("Sana", 0, 14)); // NOI18N
+        jLabel23.setText("Search by");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(108, 108, 108))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(217, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout coursesPanelLayout = new javax.swing.GroupLayout(coursesPanel);
@@ -742,9 +708,9 @@ public class StudentRegSystem extends javax.swing.JFrame {
             coursesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(coursesPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(coursesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(coursesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -988,14 +954,13 @@ public class StudentRegSystem extends javax.swing.JFrame {
             Statement st = sqlConn.createStatement();
             //String sql = "select * from students";
             //ResultSet rs = st.executeQuery(sql);
-            
-            
+
             // Populate Stuedents table usng procedure
             CallableStatement stmt_students = sqlConn.prepareCall("BEGIN main_pkg.show_students(?); END;");
             stmt_students.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_students.execute();
-            ResultSet rs = ((OracleCallableStatement)stmt_students).getCursor(1);
-            
+            ResultSet rs = ((OracleCallableStatement) stmt_students).getCursor(1);
+
             while (rs.next()) {
                 String Bnumber = rs.getString("B#");
                 String f_name = rs.getString("first_name");
@@ -1004,77 +969,74 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 String DOB = rs.getString("bdate");
                 String Level = rs.getString("st_level");
                 String GPA = String.valueOf(rs.getInt("gpa"));
-                
+
                 String tbData[] = {Bnumber, f_name, l_name, Email, DOB, Level, GPA};
-                
-                
+
                 DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
-               
+
                 tblModel.addRow(tbData);
-                
+
             }
-            
-            
+
             // Populate courses table usng procedure
             CallableStatement stmt_courses = sqlConn.prepareCall("BEGIN main_pkg.show_courses(?); END;");
             stmt_courses.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_courses.execute();
-            ResultSet rs_courses = ((OracleCallableStatement)stmt_courses).getCursor(1);
-            
-            while(rs_courses.next()) {
+            ResultSet rs_courses = ((OracleCallableStatement) stmt_courses).getCursor(1);
+
+            while (rs_courses.next()) {
                 String dept_code = rs_courses.getString("dept_code");
                 String c_num = rs_courses.getString("course#");
                 String title = rs_courses.getString("title");
-                
+
                 String tbl_coursesData[] = {dept_code, c_num, title};
-                 DefaultTableModel tbl_coursesModel = (DefaultTableModel) jTable2.getModel();
-                 
-                 tbl_coursesModel.addRow(tbl_coursesData);
+                DefaultTableModel tbl_coursesModel = (DefaultTableModel) jTable2.getModel();
+
+                tbl_coursesModel.addRow(tbl_coursesData);
             }
-            
-            
+
             // Populate prerequisties table usng procedure
             CallableStatement stmt_prerequisites = sqlConn.prepareCall("BEGIN main_pkg.show_prerequisites(?); END;");
             stmt_prerequisites.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_prerequisites.execute();
-            ResultSet rs_prerequisites = ((OracleCallableStatement)stmt_prerequisites).getCursor(1);
-            
-            while(rs_prerequisites.next()) {
+            ResultSet rs_prerequisites = ((OracleCallableStatement) stmt_prerequisites).getCursor(1);
+
+            while (rs_prerequisites.next()) {
                 String dept_code = rs_prerequisites.getString("dept_code");
                 String c_num = rs_prerequisites.getString("course#");
                 String title = rs_prerequisites.getString("pre_dept_code");
                 String precoursenum = rs_prerequisites.getString("pre_course#");
-                
+
                 String tbl_preCoursesData[] = {dept_code, c_num, title, precoursenum};
                 DefaultTableModel tbl_preCoursesModel = (DefaultTableModel) jTable3.getModel();
-                 
-                 tbl_preCoursesModel.addRow(tbl_preCoursesData);
+
+                tbl_preCoursesModel.addRow(tbl_preCoursesData);
             }
-            
+
             // Populate g_enrollement table usng procedure
             CallableStatement stmt_genroll = sqlConn.prepareCall("BEGIN main_pkg.show_g_enrollments(?); END;");
             stmt_genroll.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_genroll.execute();
-            ResultSet rs_genroll = ((OracleCallableStatement)stmt_genroll).getCursor(1);
-            
-            while(rs_genroll.next()) {
+            ResultSet rs_genroll = ((OracleCallableStatement) stmt_genroll).getCursor(1);
+
+            while (rs_genroll.next()) {
                 String gbnum = rs_genroll.getString("g_b#");
                 String classid = rs_genroll.getString("classid");
                 String score = rs_genroll.getString("score");
-                
+
                 String tbl_genrollData[] = {gbnum, classid, score};
                 DefaultTableModel tbl_genrollModel = (DefaultTableModel) jTable8.getModel();
-                 
-                 tbl_genrollModel.addRow(tbl_genrollData);
+
+                tbl_genrollModel.addRow(tbl_genrollData);
             }
-            
+
             // Populate classes table usng procedure
             CallableStatement stmt_classes = sqlConn.prepareCall("BEGIN main_pkg.show_classes(?); END;");
             stmt_classes.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_classes.execute();
-            ResultSet rs_classes = ((OracleCallableStatement)stmt_classes).getCursor(1);
-            
-            while(rs_classes.next()) {
+            ResultSet rs_classes = ((OracleCallableStatement) stmt_classes).getCursor(1);
+
+            while (rs_classes.next()) {
                 String classid = rs_classes.getString("classid");
                 String deptCode = rs_classes.getString("dept_code");
                 String score = rs_classes.getString("course#");
@@ -1084,48 +1046,45 @@ public class StudentRegSystem extends javax.swing.JFrame {
                 String limit = rs_classes.getString("limit");
                 String classSize = rs_classes.getString("class_size");
                 String room = rs_classes.getString("room");
-                
-                String tbl_classesData[] = {classid, deptCode, score, section, year, semester, limit, classSize, room };
+
+                String tbl_classesData[] = {classid, deptCode, score, section, year, semester, limit, classSize, room};
                 DefaultTableModel tbl_classesModel = (DefaultTableModel) jTable4.getModel();
-                 
-                 tbl_classesModel.addRow(tbl_classesData);
+
+                tbl_classesModel.addRow(tbl_classesData);
             }
-            
-            
-            
+
             // Populate score table usng procedure
             CallableStatement stmt_score = sqlConn.prepareCall("BEGIN main_pkg.show_score_grade(?); END;");
             stmt_score.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_score.execute();
-            ResultSet rs_score = ((OracleCallableStatement)stmt_score).getCursor(1);
-            
-            while(rs_score.next()) {
+            ResultSet rs_score = ((OracleCallableStatement) stmt_score).getCursor(1);
+
+            while (rs_score.next()) {
                 String score = rs_score.getString("score");
                 String lgrade = rs_score.getString("lgrade");
-                
+
                 String tbl_scoreData[] = {score, lgrade};
                 DefaultTableModel tbl_scoreModel = (DefaultTableModel) jTable5.getModel();
-                 
-                 tbl_scoreModel.addRow(tbl_scoreData);
+
+                tbl_scoreModel.addRow(tbl_scoreData);
             }
-            
+
             // Populate credits table usng procedure
             CallableStatement stmt_credits = sqlConn.prepareCall("BEGIN main_pkg.show_course_credit(?); END;");
             stmt_credits.registerOutParameter(1, OracleTypes.CURSOR);
             stmt_credits.execute();
-            ResultSet rs_credits = ((OracleCallableStatement)stmt_credits).getCursor(1);
-            
-            while(rs_credits.next()) {
+            ResultSet rs_credits = ((OracleCallableStatement) stmt_credits).getCursor(1);
+
+            while (rs_credits.next()) {
                 String coursenum = rs_credits.getString("course#");
                 String credits = rs_credits.getString("credits");
-                
+
                 String tbl_creditsData[] = {coursenum, credits};
                 DefaultTableModel tbl_creditsModel = (DefaultTableModel) jTable6.getModel();
-                 
-                 tbl_creditsModel.addRow(tbl_creditsData);
+
+                tbl_creditsModel.addRow(tbl_creditsData);
             }
-            
-            
+
             sqlConn.close();
             dbConnectflag = 1;
         } catch (Exception ex) {
@@ -1134,7 +1093,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
+
         // Get selected value from row and column of table and store it in String variable
         DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
         String bnumber_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 0).toString();
@@ -1144,7 +1103,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
         String dob_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 4).toString();
         String level_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 5).toString();
         String gpa_txt = tblModel.getValueAt(jTable1.getSelectedRow(), 6).toString();
-        
+
         // Fill the textfields with relevant data
         txtBnumber.setText(bnumber_txt);
         txtFname.setText(f_name_txt);
@@ -1159,14 +1118,14 @@ public class StudentRegSystem extends javax.swing.JFrame {
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         try {
-            if ((dbConnectflag == 0 || tupleSelectedFlag == 0)) 
+            if ((dbConnectflag == 0 || tupleSelectedFlag == 0)) {
                 throw new Exception();
-            else {
-            int i = mainPanel.getSelectedIndex();
-            mainPanel.setSelectedIndex(i+1);
+            } else {
+                int i = mainPanel.getSelectedIndex();
+                mainPanel.setSelectedIndex(i + 1);
             }
         } catch (Exception eup) {
-            JOptionPane.showMessageDialog(null,"Click SHOW ALL button and select student to Enroll.","Warning",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Click SHOW ALL button and select student to Enroll.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton5MouseClicked
 
@@ -1175,37 +1134,79 @@ public class StudentRegSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        String clsid = classidtxtfield.getText();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection sqlConn = DriverManager.getConnection("jdbc:oracle:thin:@castor.cc.binghamton.edu:1521:acad111", "hbhandw1", "harshad13");
             Statement st = sqlConn.createStatement();
-            
-            CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.show_stu_class(?,?,?,?); END;");
-            stmt_showclass.setString(1,clsid);
-            stmt_showclass.registerOutParameter(2, OracleTypes.CURSOR);
-            stmt_showclass.registerOutParameter(3, Types.INTEGER);
-            stmt_showclass.registerOutParameter(4, Types.VARCHAR);
-            stmt_showclass.executeUpdate();
-            ResultSet rs_showclass = ((OracleCallableStatement)stmt_showclass).getCursor(2);
-//            this.toBack();
-//            SearchFrame SF2 = new SearchFrame();
-//            SF2.setVisible(true);
-//            SF2.toFront();
-            
-            while(rs_showclass.next()) {
-                String bnum = rs_showclass.getString("B#");
-                String fname = rs_showclass.getString("first_name");
-                String lname = rs_showclass.getString("last_name");
-                
-                String tbl_showclassData[] = {bnum, fname, lname};
-                DefaultTableModel tbl_showclassModel = (DefaultTableModel) jTable9.getModel();
-                 
-                 tbl_showclassModel.addRow(tbl_showclassData);
+
+            if (searchOpt1Flag == 1) {
+                String clsid = classidtxtfield.getText();
+                CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.show_stu_class(?,?,?,?); END;");
+                stmt_showclass.setString(1, clsid);
+                stmt_showclass.registerOutParameter(2, OracleTypes.CURSOR);
+                stmt_showclass.registerOutParameter(3, Types.INTEGER);
+                stmt_showclass.registerOutParameter(4, Types.VARCHAR);
+                stmt_showclass.executeUpdate();
+                ResultSet rs_showclass = ((OracleCallableStatement) stmt_showclass).getCursor(2);
+
+                int errorflag = stmt_showclass.getInt(3);
+
+                if (errorflag == -1) {
+                    String errorMsg = stmt_showclass.getString(4);
+                    JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    this.toBack();
+//                  SearchFrame SF2 = new SearchFrame();
+                    SFram.setVisible(true);
+                    SFram.toFront();
+
+                    while (rs_showclass.next()) {
+                        String bnum = rs_showclass.getString("B#");
+                        String fname = rs_showclass.getString("first_name");
+                        String lname = rs_showclass.getString("last_name");
+
+                        String tbl_showclassData[] = {bnum, fname, lname};
+                        DefaultTableModel tbl_showclassnewModel = (DefaultTableModel) SFram.jTable1.getModel();
+
+                        tbl_showclassnewModel.addRow(tbl_showclassData);
+                    }
+                }
+            } else if (searchOpt2Flag == 1) {
+                String deptCode = deptcodetxtfield.getText();
+                Integer coursenum = Integer.parseInt(coursenumtxtfield.getText());
+                CallableStatement stmt_showclass = sqlConn.prepareCall("BEGIN main_pkg.show_prereq_class(?,?,?,?,?); END;");
+                stmt_showclass.setString(1, deptCode);
+                stmt_showclass.setInt(2, coursenum);
+                stmt_showclass.registerOutParameter(3, OracleTypes.CURSOR);
+                stmt_showclass.registerOutParameter(4, Types.INTEGER);
+                stmt_showclass.registerOutParameter(5, Types.VARCHAR);
+                stmt_showclass.executeUpdate();
+                ResultSet rs_showclass = ((OracleCallableStatement) stmt_showclass).getCursor(3);
+
+                int errorFlag = stmt_showclass.getInt(4);
+
+                if (errorFlag == -1) {
+                    String errorMsg = stmt_showclass.getString(5);
+                    JOptionPane.showMessageDialog(null, errorMsg, "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    this.toBack();
+//              SearchFrame SF2 = new SearchFrame();
+                    SFram1.setVisible(true);
+                    SFram1.toFront();
+
+                    while (rs_showclass.next()) {
+                        String precourse = rs_showclass.getString("pre_course");
+
+                        String tbl_showclassData[] = {precourse};
+                        DefaultTableModel tbl_showclassnewModel = (DefaultTableModel) SFram1.jTable1.getModel();
+
+                        tbl_showclassnewModel.addRow(tbl_showclassData);
+                    }
+                }
             }
-            
+
             sqlConn.close();
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -1228,21 +1229,21 @@ public class StudentRegSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1MouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        if((jComboBox1.getSelectedItem().toString()).equals("ClassId")) {
+        if ((jComboBox1.getSelectedItem().toString()).equals("ClassId")) {
             classidtxtfield.setEnabled(true);
             btnSearch.setEnabled(true);
             deptcodetxtfield.setEnabled(false);
             coursenumtxtfield.setEnabled(false);
-        
-        }
-        else if((jComboBox1.getSelectedItem().toString()).equals("DeptCode,Course#")) {
+            searchOpt1Flag = 1;
+
+        } else if ((jComboBox1.getSelectedItem().toString()).equals("DeptCode,Course#")) {
             classidtxtfield.setEnabled(false);
             deptcodetxtfield.setEnabled(true);
             coursenumtxtfield.setEnabled(true);
             btnSearch.setEnabled(true);
-        }
-        else {
-            JOptionPane.showMessageDialog(null,"Select search by option.","Ooopss..",JOptionPane.WARNING_MESSAGE);
+            searchOpt2Flag = 1;
+        } else {
+            JOptionPane.showMessageDialog(null, "Select search by option.", "Ooopss..", JOptionPane.WARNING_MESSAGE);
             classidtxtfield.setEnabled(false);
             deptcodetxtfield.setEnabled(false);
             coursenumtxtfield.setEnabled(false);
@@ -1312,6 +1313,7 @@ public class StudentRegSystem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1320,7 +1322,6 @@ public class StudentRegSystem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1337,7 +1338,6 @@ public class StudentRegSystem extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
@@ -1346,7 +1346,6 @@ public class StudentRegSystem extends javax.swing.JFrame {
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
-    public javax.swing.JTable jTable9;
     private javax.swing.JLabel label_classid;
     private javax.swing.JLabel label_coursenum;
     private javax.swing.JLabel label_deptcode;
